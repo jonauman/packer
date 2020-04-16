@@ -19,13 +19,13 @@ import (
 var reShutdownBehavior = regexp.MustCompile("^(stop|terminate)$")
 
 type OmiFilterOptions struct {
-	hcl2template.KVFilter `mapstructure:",squash"`
-	Owners                []string
-	MostRecent            bool `mapstructure:"most_recent"`
+	hcl2template.NameValueFilter `mapstructure:",squash"`
+	Owners                       []string
+	MostRecent                   bool `mapstructure:"most_recent"`
 }
 
 func (d *OmiFilterOptions) Empty() bool {
-	return len(d.Owners) == 0 && d.KVFilter.Empty()
+	return len(d.Owners) == 0 && d.NameValueFilter.Empty()
 }
 
 func (d *OmiFilterOptions) NoOwner() bool {
@@ -33,17 +33,17 @@ func (d *OmiFilterOptions) NoOwner() bool {
 }
 
 type SubnetFilterOptions struct {
-	hcl2template.KVFilter `mapstructure:",squash"`
-	MostFree              bool `mapstructure:"most_free"`
-	Random                bool `mapstructure:"random"`
+	hcl2template.NameValueFilter `mapstructure:",squash"`
+	MostFree                     bool `mapstructure:"most_free"`
+	Random                       bool `mapstructure:"random"`
 }
 
 type NetFilterOptions struct {
-	hcl2template.KVFilter `mapstructure:",squash"`
+	hcl2template.NameValueFilter `mapstructure:",squash"`
 }
 
 type SecurityGroupFilterOptions struct {
-	hcl2template.KVFilter `mapstructure:",squash"`
+	hcl2template.NameValueFilter `mapstructure:",squash"`
 }
 
 // RunConfig contains configuration for running an vm from a source

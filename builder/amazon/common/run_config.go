@@ -20,9 +20,9 @@ import (
 var reShutdownBehavior = regexp.MustCompile("^(stop|terminate)$")
 
 type AmiFilterOptions struct {
-	hcl2template.KVFilter `mapstructure:",squash"`
-	Owners                []string
-	MostRecent            bool `mapstructure:"most_recent"`
+	hcl2template.KeyValueFilter `mapstructure:",squash"`
+	Owners                      []string
+	MostRecent                  bool `mapstructure:"most_recent"`
 }
 
 func (d *AmiFilterOptions) GetOwners() []*string {
@@ -35,7 +35,7 @@ func (d *AmiFilterOptions) GetOwners() []*string {
 }
 
 func (d *AmiFilterOptions) Empty() bool {
-	return len(d.Owners) == 0 && d.KVFilter.Empty()
+	return len(d.Owners) == 0 && d.KeyValueFilter.Empty()
 }
 
 func (d *AmiFilterOptions) NoOwner() bool {
@@ -43,13 +43,13 @@ func (d *AmiFilterOptions) NoOwner() bool {
 }
 
 type SubnetFilterOptions struct {
-	hcl2template.KVFilter `mapstructure:",squash"`
-	MostFree              bool `mapstructure:"most_free"`
-	Random                bool `mapstructure:"random"`
+	hcl2template.KeyValueFilter `mapstructure:",squash"`
+	MostFree                    bool `mapstructure:"most_free"`
+	Random                      bool `mapstructure:"random"`
 }
 
 type VpcFilterOptions struct {
-	hcl2template.KVFilter `mapstructure:",squash"`
+	hcl2template.KeyValueFilter `mapstructure:",squash"`
 }
 
 type Statement struct {
@@ -64,7 +64,7 @@ type PolicyDocument struct {
 }
 
 type SecurityGroupFilterOptions struct {
-	hcl2template.KVFilter `mapstructure:",squash"`
+	hcl2template.NameValueFilter `mapstructure:",squash"`
 }
 
 // RunConfig contains configuration for running an instance from a source
